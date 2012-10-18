@@ -5,7 +5,7 @@ import os
 # Configuring the Application
 app = Flask(__name__, template_folder='static')
 #app.host ='0.0.0.0'
-#app.debug = True
+app.debug = True
 app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'uploads')
 
 
@@ -33,38 +33,33 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload():
-    file = request.files['file_selector-inputEl']
-    print(file.filename)
-    response = {"success": "true"}
+    # I find it more elegant to iterate rather than specify a key
+    for element in request.files:
+        file = request.files[element]
+        print file.filename
+        safe_name = secure_filename(file.filename)
+        print safe_name
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], safe_name))
+        #upload_success = True
 
-    print response
-    print jsonify(response)
+    # Doesn't work
+    # if upload_success:
+    #     return jsonify(success=True)
+    # else:
+    #     return jsonify(success=False)
 
-    return jsonify(response)
-
-    # print (jsonify("success"="true"))
-    #file.save(os.path.join(app.config['UPLOAD_FOLDER'], "1.pdf"))
-    #return jsonify(success=True)
-
-    # return '''\
-    #         {
-    #         "success":true, // note this is Boolean, not string
-    #         }\
-    #         '''
-
-
-    # return jsonify(success=True,
-    #     file='1.pdf',
-    #     file_url='/upload/1.pdf')
-    # file = request.files.values()[0]
-    # #filename = secure_filename(file)
-    # file.save(os.path.join(app.config['UPLOAD_FOLDER'], "1.pdf"))
+    # Working
+    return '''\
+            {
+            "success":true
+            }\
+            '''
 
 
-@app.route('/upload/<path:filename>')
-def download_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'],
-                               filename, as_attachment=True)
+# @app.route('/upload/<path:filename>')
+# def download_file(filename):
+#     return send_from_directory(app.config['UPLOAD_FOLDER'],
+#                                filename, as_attachment=True)
 
 
 if __name__ == '__main__':

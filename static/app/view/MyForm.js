@@ -66,23 +66,20 @@ Ext.define('flaskextjsuploader.view.MyForm', {
     },
 
     upload_onButtonClick: function(button, e, options) {
-        //console.log(this)
-        //var form = this.up('form').getForm();
+        //console.log(Ext.ComponentManager.get('form'));
 
-        var form = this.form;
+        var form = Ext.ComponentManager.get('form');
 
-        if (form.isValid()) {
-            form.submit({
-                url: '/upload',
-                waitMsg: 'Uploading...',
-                success: function(form, action) {
-                    Ext.Msg.alert('Success', action.result.message);
-                },
-                failure: function(form, action) {
-                    Ext.Msg.alert('Failed', action.result ? action.result.message : 'No Response');
-                }
-            });
-        }
+        form.submit({
+            url: '/upload',
+            waitMsg: 'Uploading...',
+            success: function(form, action) {
+                Ext.Msg.alert('Success', action.result.message);
+            },
+            failure: function(form, action) {
+                Ext.Msg.alert('Failed', action.result ? action.result.message : 'No Response');
+            }
+        });
     }
 
 });
