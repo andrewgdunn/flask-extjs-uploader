@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template, redirect, url_for, jsonify, send_from_directory
+from flask import Flask, request, render_template, redirect, url_for
+from flask import make_response, send_from_directory
 from werkzeug import secure_filename
 import os
 
@@ -11,6 +12,8 @@ app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'uploads')
 
 # Need these to route requests to the proper resources
 # Sencha has a particular deploy style that I want to not touch
+# The goal of this project was to be able to accomodate rapid protyping using
+# Sencha architect. I wanted to be able to use a default deploy folder.
 @app.route('/app.js')
 def sencha_app():
     return redirect(url_for('static', filename='app.js'))
@@ -40,22 +43,18 @@ def upload():
         safe_name = secure_filename(file.filename)
         print safe_name
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], safe_name))
-        #upload_success = True
 
-    # Doesn't work
-    # if upload_success:
-    #     return jsonify(success=True)
-    # else:
-    #     return jsonify(success=False)
+    # For Ext.form.action.Submit you need to return 'text/html' as a mimetype
+    # instead of json (Even though the response is actually json). I'm not sure
+    # why. There are many examples where people manually construct the response
+    # That I dug through during my confusion. Below is a response object that
+    # works.
+    response = make_response('{"success":true}')
+    response.mimetype = 'text/html'
+    return response
 
-    # Working
-    return '''\
-            {
-            "success":true
-            }\
-            '''
-
-
+# Maybe I'll extend this to be able to download the file back out, but that is
+# Less of a concern than just handling forms right now.
 # @app.route('/upload/<path:filename>')
 # def download_file(filename):
 #     return send_from_directory(app.config['UPLOAD_FOLDER'],
