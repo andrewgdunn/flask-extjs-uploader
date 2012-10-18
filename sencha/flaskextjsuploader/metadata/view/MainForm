@@ -1,0 +1,120 @@
+{
+    "type": "form",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "MainForm",
+        "designer|initialView": true,
+        "height": 100,
+        "id": "MainForm",
+        "margin": 25,
+        "width": 400,
+        "bodyPadding": 10,
+        "title": "Flask ExtJS Uploader"
+    },
+    "id": "ExtBox1-ext-gen2112",
+    "designerId": "1227489a-f5df-4807-9726-bf0373f989a3",
+    "cn": [
+        {
+            "type": "filefield",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout|anchor": "100%",
+                "designer|userClassName": "MyFileUpload",
+                "id": "form_file_upload",
+                "fieldLabel": "Select File"
+            },
+            "designerId": "8b3c8150-5af4-4258-bb5a-307f7192f5c4"
+        },
+        {
+            "type": "button",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|userClassName": "MyButton",
+                "designer|displayName": null,
+                "id": "button_reset",
+                "itemId": null,
+                "margin": 10,
+                "text": "Reset"
+            },
+            "designerId": "28ef54de-0c21-4583-a2e0-b22e826044b6",
+            "cn": [
+                {
+                    "type": "basiceventbinding",
+                    "reference": {
+                        "name": "listeners",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|userClassName": "button_reset_onButtonClick",
+                        "fn": "button_reset_onButtonClick",
+                        "implHandler": [
+                            "Ext.ComponentManager.get('form_file_upload').reset();"
+                        ],
+                        "name": "click",
+                        "scope": "me"
+                    },
+                    "designerId": "6697ceda-188e-4fd1-844e-fdf70cfe57f8"
+                }
+            ]
+        },
+        {
+            "type": "button",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|userClassName": "MyButton1",
+                "id": "button_upload",
+                "margin": 10,
+                "text": "Upload"
+            },
+            "designerId": "37488a0a-cc8c-4c77-8bf9-d47cf00faae1",
+            "cn": [
+                {
+                    "type": "basiceventbinding",
+                    "reference": {
+                        "name": "listeners",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|userClassName": "button_upload_onButtonClick",
+                        "fn": "button_upload_onButtonClick",
+                        "implHandler": [
+                            "var form = Ext.ComponentManager.get('MainForm');",
+                            "",
+                            "form.submit({",
+                            "    url: '/upload',",
+                            "    waitMsg: 'Uploading...',",
+                            "    success: function(form, action) {",
+                            "        Ext.Msg.alert('Success', action.result.message);",
+                            "    },",
+                            "    failure: function(form, action) {",
+                            "        Ext.Msg.alert('Failed', action.result ? action.result.message : 'No Response');",
+                            "    }",
+                            "});"
+                        ],
+                        "name": "click",
+                        "scope": "me"
+                    },
+                    "designerId": "52db48dc-e0cd-4fea-86e7-2e09aa6dacff"
+                }
+            ]
+        }
+    ]
+}

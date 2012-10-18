@@ -24,9 +24,9 @@ def sencha_viewport():
     return redirect(url_for('static', filename='app/view/Viewport.js'))
 
 
-@app.route('/app/view/MyForm.js')
+@app.route('/app/view/MainForm.js')
 def sencha_mypanel():
-    return redirect(url_for('static', filename='app/view/MyForm.js'))
+    return redirect(url_for('static', filename='app/view/MainForm.js'))
 
 
 @app.route('/')
@@ -39,9 +39,7 @@ def upload():
     # I find it more elegant to iterate rather than specify a key
     for element in request.files:
         file = request.files[element]
-        print file.filename
         safe_name = secure_filename(file.filename)
-        print safe_name
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], safe_name))
 
     # For Ext.form.action.Submit you need to return 'text/html' as a mimetype

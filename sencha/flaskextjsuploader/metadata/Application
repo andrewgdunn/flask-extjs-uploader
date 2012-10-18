@@ -1,0 +1,17 @@
+{
+    "type": "application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "views": [
+            "MainForm"
+        ],
+        "autoCreateViewport": true,
+        "name": "flaskextjsuploader"
+    },
+    "id": "ExtBox1-ext-gen1771",
+    "designerId": "application"
+}

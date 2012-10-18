@@ -1,0 +1,47 @@
+{
+    "name": "flaskextjsuploader",
+    "settings": {
+        "urlPrefix": "",
+        "spacesToIndent": 4,
+        "exportPath": "/home/agd/Development/projects/flask-extjs-uploader/static",
+        "lineEnding": "LF",
+        "genTimestamps": false,
+        "cacheBust": false
+    },
+    "xdsVersion": "2.1.0",
+    "xdsBuild": 640,
+    "schemaVersion": 1,
+    "upgradeVersion": 210000000498,
+    "framework": "ext41",
+    "topInstanceFileMap": {
+        "1227489a-f5df-4807-9726-bf0373f989a3": {
+            "paths": [
+                "metadata/view/MainForm",
+                "app/view/override/MainForm.js",
+                "app/view/MainForm.js",
+                "app/view/Viewport.js"
+            ],
+            "className": "MainForm"
+        },
+        "1e2df1f7-a6ce-41b8-855e-55fe506bd762": {
+            "paths": [
+                "metadata/resource/Library"
+            ],
+            "className": "Library"
+        }
+    },
+    "viewOrderMap": {
+        "view": [
+            "1227489a-f5df-4807-9726-bf0373f989a3"
+        ],
+        "store": [],
+        "controller": [],
+        "model": [],
+        "resource": [
+            "1e2df1f7-a6ce-41b8-855e-55fe506bd762"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}
