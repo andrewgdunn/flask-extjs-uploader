@@ -10,6 +10,11 @@ app.debug = True
 app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'uploads')
 
 
+@app.route('/')
+def index():
+    return render_template('app.html')
+
+
 # Need these to route requests to the proper resources
 # Sencha has a particular deploy style that I want to not touch
 # The goal of this project was to be able to accomodate rapid protyping using
@@ -22,16 +27,6 @@ def sencha_app():
 @app.route('/app/view/Viewport.js')
 def sencha_viewport():
     return redirect(url_for('static', filename='app/view/Viewport.js'))
-
-
-@app.route('/app/view/MainForm.js')
-def sencha_mypanel():
-    return redirect(url_for('static', filename='app/view/MainForm.js'))
-
-
-@app.route('/')
-def index():
-    return render_template('app.html')
 
 
 @app.route('/upload', methods=['POST'])
